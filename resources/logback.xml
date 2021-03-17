@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <!-- Appenders: http://logback.qos.ch/manual/appenders.html -->
+
+  <!-- pattern: %date [%thread] %-5level %logger - [%file:%line] - %message%n -->
+  
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+		</encoder>
+	</appender>
+
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <File>logs/app.log</File>
+    <encoder>
+    <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</Pattern>   
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <minIndex>1</minIndex>
+      <maxIndex>10</maxIndex>
+      <FileNamePattern>app.log.%i</FileNamePattern>
+    </rollingPolicy>
+
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <MaxFileSize>10MB</MaxFileSize>
+    </triggeringPolicy>
+  </appender>
+
+
+  <!-- Root -->
+  <root level="DEBUG">
+	<appender-ref ref="FILE"/>
+	<appender-ref ref="STDOUT"/>
+  </root>
+ 
+</configuration>
